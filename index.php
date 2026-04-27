@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Hardware System Login</title>
 
@@ -8,7 +9,7 @@
             margin: 0;
             font-family: Arial;
             background: linear-gradient(135deg, #2c3e50, #3498db);
-            height:100vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -19,7 +20,7 @@
             padding: 80px;
             width: 300px;
             border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
 
@@ -54,16 +55,17 @@
 
 <body>
 
-<div class="login-box">
-    <h2>Hardware System</h2>
+    <div class="login-box">
+        <h2>Hardware System</h2>
 
-    <form method="POST" action="login.php">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
+        <form method="POST" action="login.php">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
 
-        <button type="submit">Login</button>
-    </form>
-</div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 
 </body>
+
 </html>
