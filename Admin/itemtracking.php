@@ -1,11 +1,21 @@
 <?php
 include '../db.php';
 
-$result = $conn->query("SELECT r.request_id, u.name, h.category, r.status
-                        FROM request r
-                        JOIN users u ON r.user_id = u.user_id
-                        JOIN hardware h ON r.hardware_id = h.hardware_id");
+// get available items
+/*
+$result = $conn->query("SELECT * FROM assignment a
+                        JOIN hardware h ON a.hardware_id = h.hardware_id
+                        JOIN users u ON a.user_id = u.user_id");
+*/
+$isAssignmentDataEmpty = true;
+$result = $conn->query("SELECT assignment_id FROM assignment LIMIT 1");
+
+if ($result->num_rows > 0) {
+    $isAssignmentDataEmpty = false;
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -135,43 +145,23 @@ th {
 <!-- SIDEBAR -->
 <div class="sidebar">
     <h2>Admin</h2>
-    <a href="#">Dashboard</a>
-    <a href="itemtracking.php">Track Item</a>
+    <a href="dashboard.php">Dashboard</a>
+    <a href="#">Track Item</a>
     <a href="#" onclick="openModal()">Add Item</a>
     <a href="../logout.php">Logout</a>
 </div>
 
 <!-- MAIN -->
 <div class="main">
+    <h2>Available Hardware</h2>
+    <?php if ($isAssignmentDataEmpty) { ?>
+        <p>No items have been assigned yet.</p>
+    <?php } else { ?> 
+        <p>There are items waiting to be displayed.</p>
+    <?php } ?>
 
-    <div class="top-bar">
-        <h2>Requests</h2>
-        <button onclick="openModal()" class="add-btn">+ Add Item</button>
     </div>
-
-    <table>
-        <tr>
-            <th>User</th>
-            <th>Item</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-
-        <?php while($row = $result->fetch_assoc()) { ?>
-        <tr>
-            <td><?= $row['name'] ?></td>
-            <td><?= $row['category'] ?></td>
-            <td><?= $row['status'] ?></td>
-            <td>
-                <a href="approve.php?id=<?= $row['request_id'] ?>" class="action-btn approve">Approve</a>
-                <a href="reject.php?id=<?= $row['request_id'] ?>" class="action-btn reject">Reject</a>
-            </td>
-        </tr>
-        <?php } ?>
-    </table>
-
 </div>
-
 <!-- MODAL -->
 <div id="modal" class="modal">
   <div class="modal-content">
