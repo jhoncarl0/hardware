@@ -4,6 +4,16 @@ include '../db.php';
 
 // get available items
 $result = $conn->query("SELECT * FROM hardware WHERE status='available'");
+
+// total available items
+$available = $conn->query("SELECT COUNT(*) as total FROM hardware WHERE status='available'");
+$availableCount = $available->fetch_assoc()['total'];
+
+// pending requests of this user
+$user_id = $_SESSION['user_id'];
+$pending = $conn->query("SELECT COUNT(*) as total FROM request 
+                         WHERE user_id=$user_id AND status='pending'");
+$pendingCount = $pending->fetch_assoc()['total'];
 ?>
 
 <!DOCTYPE html>
@@ -52,6 +62,33 @@ body {
     flex: 1;
     padding: 20px;
     background: #ecf0f1;
+}
+
+/* STATS */
+.stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.stat-card h3 {
+    margin: 0;
+    font-size: 28px;
+    color: #3498db;
+}
+
+.stat-card p {
+    margin: 5px 0 0;
+    color: gray;
 }
 
 /* CARDS */
@@ -103,14 +140,31 @@ button:hover {
     <h2>Hi, <?= $_SESSION['name'] ?></h2>
 
     <a href="#">Dashboard</a>
-    <a href="assigned.php">Assigned Items</a>
+    <a href="assigned.php">Assigned Devices</a>
+    <a href="history.php">Request History</a>
     <a href="settings.php">Settings</a>
     <a href="../logout.php">Logout</a>
 </div>
 
 <!-- MAIN -->
 <div class="main">
-    <h2>Available Hardware</h2>
+
+     <!-- HEADER -->
+    <div class="header">
+        <h2>Available Devices</h2>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3><?= $availableCount ?></h3>
+                <p>📦 Available</p>
+            </div>
+
+            <div class="stat-card">
+                <h3><?= $pendingCount ?></h3>
+                <p>⏳ Pending</p>
+            </div>
+        </div>
+    </div>
 
     <div class="card-container">
 

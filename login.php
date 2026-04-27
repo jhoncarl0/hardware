@@ -13,6 +13,7 @@ if ($result->num_rows > 0) {
     $_SESSION['user_id'] = $user['user_id'];
     $_SESSION['role'] = $user['role'];
     $_SESSION['name'] = $user['name'];
+    $_SESSION['image'] = $row['image'];
 
     if ($user['role'] == 'admin') {
         header("Location: admin/dashboard.php");
