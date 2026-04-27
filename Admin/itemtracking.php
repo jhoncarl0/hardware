@@ -198,7 +198,7 @@ function closeModal() {
     document.getElementById("modal").style.display = "none";
 }
 </script>
-<script src="https://kit.fontawesome.com/da92db8247.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/da92db8247.js" crossorigin="anonymous"></script> <!--icon library-->
 
 </body>
 </html>
