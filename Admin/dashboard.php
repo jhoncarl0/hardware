@@ -5,7 +5,11 @@ $result = $conn->query("SELECT r.request_id, u.name, h.category, r.status
                         FROM request r
                         JOIN users u ON r.user_id = u.user_id
                         JOIN hardware h ON r.hardware_id = h.hardware_id");
+
+$current = basename($_SERVER['PHP_SELF']); //Gets the filename of the current page. For example, from http://localhost/hardware/admin/requests.php, it extracts only requests.php.
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -41,6 +45,12 @@ body {
 
 .sidebar a:hover {
     background: #3498DB;
+}
+
+.sidebar a.active{ /*changes color when the link is clicked or selected*/
+    background: #3498DB;
+    color:white;
+    border-radius:4px;
 }
 
 /* MAIN */
@@ -136,9 +146,9 @@ th {
 <!-- SIDEBAR -->
 <div class="sidebar">
     <h2>Admin</h2>
-    <a href="#"><i class="fa-solid fa-chart-column"></i> Dashboard</a>
+    <a href="#" class="<?= $current == 'dashboard.php' ? 'active' : '' ?>"><i class="fa-solid fa-chart-column"></i> Dashboard</a>
     <a href="itemtracking.php"><i class="fa-solid fa-computer"></i> Track Item</a>
-    <a href="#" onclick="openModal()"><i class="fa-solid fa-circle-plus"></i> Add Item</a>
+     <a href="requests.php" class="<?= $current == 'requests.php' ? 'active' : '' ?>"><i class="fa-solid fa-clipboard-question"></i> Requests</a>
     <a href="../logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
 </div>
 
@@ -146,59 +156,15 @@ th {
 <div class="main">
 
     <div class="top-bar">
-        <h2>Requests</h2>
-        <button onclick="openModal()" class="add-btn">+ Add Item</button>
+        <h2>Dashboard</h2>
+        
     </div>
 
-    <table>
-        <tr>
-            <th>User</th>
-            <th>Item</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-
-        <?php while($row = $result->fetch_assoc()) { ?>
-        <tr>
-            <td><?= $row['name'] ?></td>
-            <td><?= $row['category'] ?></td>
-            <td><?= $row['status'] ?></td>
-            <td>
-                <a href="approve.php?id=<?= $row['request_id'] ?>" class="action-btn approve">Approve</a>
-                <a href="reject.php?id=<?= $row['request_id'] ?>" class="action-btn reject">Reject</a>
-            </td>
-        </tr>
-        <?php } ?>
-    </table>
+    <p>No dashboard yet.</p>
 
 </div>
 
-<!-- MODAL -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
 
-    <h3>Add Item</h3>
-
-    <form method="POST" action="add_item.php" enctype="multipart/form-data">
-        <input type="text" name="category" placeholder="Item Name" required>
-        <input type="text" name="serial" placeholder="Serial Number" required>
-        <input type="file" name="image" required>
-
-        <button type="submit">Add</button>
-    </form>
-  </div>
-</div>
-
-<!-- SCRIPT -->
-<script>
-function openModal() {
-    document.getElementById("modal").style.display = "block";
-}
-
-function closeModal() {
-    document.getElementById("modal").style.display = "none";
-}
 </script>
 <script src="https://kit.fontawesome.com/da92db8247.js" crossorigin="anonymous"></script>  
 

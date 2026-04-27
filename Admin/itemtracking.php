@@ -14,6 +14,8 @@ if ($result->num_rows > 0) {
     $isAssignmentDataEmpty = false;
 }
 
+$current = basename($_SERVER['PHP_SELF']);
+
 ?>
 
 
@@ -46,10 +48,17 @@ body {
     padding: 10px;
     text-decoration: none;
     margin: 10px 0;
+    border-radius:4px;
 }
 
 .sidebar a:hover {
     background: #34495e;
+}
+
+.sidebar a.active {
+    background: #3498DB;
+    color: white;
+    border-radius:4px;
 }
 
 /* MAIN */
@@ -146,8 +155,8 @@ th {
 <div class="sidebar">
     <h2>Admin</h2>
     <a href="dashboard.php"><i class="fa-solid fa-chart-column"></i> Dashboard</a>
-    <a href="itemtracking.php"><i class="fa-solid fa-computer"></i> Track Item</a>
-    <a href="#" onclick="openModal()"><i class="fa-solid fa-circle-plus"></i> Add Item</a>
+    <a href="itemtracking.php" class="<?= $current == 'itemtracking.php' ? 'active' : '' ?>"><i class="fa-solid fa-computer"></i> Track Item</a>
+    <a href="requests.php" class="<?= $current == 'requests.php' ? 'active' : '' ?>"><i class="fa-solid fa-clipboard-question"></i> Requests</a>
     <a href="../logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
 </div>
 
