@@ -55,7 +55,7 @@ $pendingCount = $pending->fetch_assoc()['total'];
         }
 
         .sidebar a:hover {
-            background: #34495e;
+            background: #3498DB;
         }
 
 /* MAIN CONTENT */
