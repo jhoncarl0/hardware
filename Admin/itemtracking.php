@@ -145,10 +145,10 @@ th {
 <!-- SIDEBAR -->
 <div class="sidebar">
     <h2>Admin</h2>
-    <a href="dashboard.php">Dashboard</a>
-    <a href="#">Track Item</a>
-    <a href="#" onclick="openModal()">Add Item</a>
-    <a href="../logout.php">Logout</a>
+    <a href="dashboard.php"><i class="fa-solid fa-chart-column"></i> Dashboard</a>
+    <a href="itemtracking.php"><i class="fa-solid fa-computer"></i> Track Item</a>
+    <a href="#" onclick="openModal()"><i class="fa-solid fa-circle-plus"></i> Add Item</a>
+    <a href="../logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
 </div>
 
 <!-- MAIN -->
@@ -189,6 +189,7 @@ function closeModal() {
     document.getElementById("modal").style.display = "none";
 }
 </script>
+<script src="https://kit.fontawesome.com/da92db8247.js" crossorigin="anonymous"></script>
 
 </body>
 </html>
