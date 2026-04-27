@@ -106,7 +106,7 @@ $result = $conn->query("SELECT * FROM hardware WHERE status='available'");
         <a href="#">Dashboard</a>
         <a href="assigned.php">Assigned Items</a>
         <a href="settings.php">Settings</a>
-        <a href="../index.php">Logout</a>
+        <a href="../logout.php">Logout</a>
     </div>
 
     <!-- MAIN -->
